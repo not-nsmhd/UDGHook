@@ -1,0 +1,10 @@
+*.o
+*.d
+bin/
+obj/
+
+.vs/
+lib_vs/*
+
+*.aps
+*.cso
