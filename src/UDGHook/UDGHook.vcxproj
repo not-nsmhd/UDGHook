@@ -96,10 +96,6 @@
       <AdditionalDependencies>detours.lib;syelog.lib;d3d11.lib;dxgi.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)lib\detours\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
-    <PostBuildEvent>
-      <Command>xcopy /Y "$(TargetPath)" "$(LocalDebuggerWorkingDirectory)plugins\$(TargetFileName)"</Command>
-      <Message>Copying built plugin binary to game's directory...</Message>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Common\Logging\Logging.cpp" />
