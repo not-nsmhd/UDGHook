@@ -7,12 +7,6 @@
 
 namespace UDGHook::GFX
 {
-	struct
-	{
-		ID3D11Device* Device{};
-		ID3D11DeviceContext* DevContext{};
-	} D3D;
-
 	namespace FuncDefs
 	{
 		typedef void (*UnbindVertexBuffer)();
@@ -23,19 +17,25 @@ namespace UDGHook::GFX
 		typedef void (*RenderFrame)();
 	}
 
-	struct
+	struct OGFuncs
 	{
 		FuncDefs::UnbindVertexBuffer UnbindVertexBuffer{};
 		FuncDefs::ExecuteCommandBuffer ExecuteCommandBuffer{};
 		FuncDefs::DrawCommandFunc* DrawCommandFuncs{};
 		FuncDefs::RenderFrame RenderFrame{};
-	} OGFuncs;
+	};
 
-	struct
+	struct D3DData
+	{
+		ID3D11Device* Device{};
+		ID3D11DeviceContext* DevContext{};
+	};
+
+	struct OGData
 	{
 		DrawCommand* FirstDrawCommand{};
 		i16* MaxDrawCommands{};
-	} OGData;
+	};
 
 	namespace HookedFuncs
 	{
@@ -47,4 +47,6 @@ namespace UDGHook::GFX
 
 	bool Init();
 	void Destroy();
+
+	D3DData* GetD3DData();
 }

@@ -7,20 +7,17 @@ namespace UDGHook::Main
 {
 	struct
 	{
-		HWND* WindowHandle{};
+		HWND Handle{};
 	} WindowData;
 
 	namespace FuncDefs
 	{
 		typedef LRESULT(*WINAPI WindowProc)(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
-		//typedef void (*FatalError)(const char* format, ...);
-
 		typedef int (*GameInit)();
 		typedef void (*TryGameInit)();
 
-		//typedef void (*UpdatePlayerInputs)(int unknown);
-		//typedef void (*Log_InGame)(const char* format, ...);
+		typedef void (*RenderFrame)();
 	}
 
 	struct
@@ -30,15 +27,15 @@ namespace UDGHook::Main
 		FuncDefs::GameInit GameInit{};
 		FuncDefs::TryGameInit TryGameInit{};
 
-		//FuncDefs::FatalError FatalError{};
-		//FuncDefs::UpdatePlayerInputs UpdatePlayerInputs{};
-		//FuncDefs::Log_InGame Log_InGame{};
+		FuncDefs::RenderFrame RenderFrame{};
 	} OGFuncs;
 
 	namespace HookedFuncs
 	{
 		LRESULT WINAPI WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 		void TryGameInit();
+
+		void RenderFrame();
 	}
 
 	bool InitHooks(offset_t baseAddress);

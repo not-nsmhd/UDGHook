@@ -12,24 +12,30 @@ namespace UDGHook::GFX
 
 	static constexpr const char LogName[] = "UDGHook::GFX";
 
+	static OGFuncs ogFuncs{};
+	static OGData ogData{};
+	static D3DData d3d{};
+
 	bool InitHooks(offset_t baseAddress)
 	{
 		BaseAddress = baseAddress;
 
-		OGFuncs.UnbindVertexBuffer = reinterpret_cast<FuncDefs::UnbindVertexBuffer>(baseAddress + 0x129800);
-		OGFuncs.ExecuteCommandBuffer = reinterpret_cast<FuncDefs::ExecuteCommandBuffer>(baseAddress + 0x124AA0);
-		OGFuncs.RenderFrame = reinterpret_cast<FuncDefs::RenderFrame>(baseAddress + 0x121D10);
-
-		OGFuncs.DrawCommandFuncs = reinterpret_cast<FuncDefs::DrawCommandFunc*>(baseAddress + 0x30AED0);
+		ogFuncs.UnbindVertexBuffer = reinterpret_cast<FuncDefs::UnbindVertexBuffer>(baseAddress + 0x129800);
+		ogFuncs.ExecuteCommandBuffer = reinterpret_cast<FuncDefs::ExecuteCommandBuffer>(baseAddress + 0x124AA0);
+		ogFuncs.RenderFrame = reinterpret_cast<FuncDefs::RenderFrame>(baseAddress + 0x121D10);
+		
+		ogFuncs.DrawCommandFuncs = reinterpret_cast<FuncDefs::DrawCommandFunc*>(baseAddress + 0x30AED0);
 
 		DetourRestoreAfterWith();
 
 		DetourTransactionBegin();
 		DetourUpdateThread(GetCurrentThread());
 
-		if (DetourAttach(&(PVOID&)OGFuncs.RenderFrame, HookedFuncs::RenderFrame) != NO_ERROR) { return false; }
+		//if (DetourAttach(&(PVOID&)ogFuncs.RenderFrame, HookedFuncs::RenderFrame) != NO_ERROR) { return false; }
 
 		DetourTransactionCommit();
+
+		LogInfo(LogName, "Hooked functions");
 		return true;
 	}
 
@@ -40,19 +46,22 @@ namespace UDGHook::GFX
 		DetourTransactionBegin();
 		DetourUpdateThread(GetCurrentThread());
 
-		DetourDetach(&(PVOID&)OGFuncs.RenderFrame, HookedFuncs::RenderFrame);
+		DetourDetach(&(PVOID&)ogFuncs.RenderFrame, HookedFuncs::RenderFrame);
 
 		DetourTransactionCommit();
+		LogInfo(LogName, "Detached hooked functions");
 	}
 
 	bool Init()
 	{
-		D3D.Device = reinterpret_cast<ID3D11Device*>(BaseAddress + 0x82C190);
-		D3D.DevContext = reinterpret_cast<ID3D11DeviceContext*>(BaseAddress + 0x82C198);
+		d3d.Device = *reinterpret_cast<ID3D11Device**>(BaseAddress + 0x82C190);
+		d3d.DevContext = *reinterpret_cast<ID3D11DeviceContext**>(BaseAddress + 0x82C198);
 
-		OGData.FirstDrawCommand = reinterpret_cast<DrawCommand*>(BaseAddress + 0x826490);
-		OGData.MaxDrawCommands = reinterpret_cast<i16*>(BaseAddress + 0x802B72);
+		ogData.FirstDrawCommand = reinterpret_cast<DrawCommand*>(BaseAddress + 0x826490);
+		ogData.MaxDrawCommands = reinterpret_cast<i16*>(BaseAddress + 0x802B72);
 
+		LogInfo(LogName, "Max draw commands: %d", *ogData.MaxDrawCommands);
+		LogInfo(LogName, "Initialized GFX");
 		return true;
 	}
 
@@ -60,9 +69,14 @@ namespace UDGHook::GFX
 	{
 	}
 
+	D3DData* GetD3DData()
+	{
+		return &d3d;
+	}
+
 	void HookedFuncs::RenderFrame()
 	{
-		OGFuncs.RenderFrame();
+		ogFuncs.RenderFrame();
 
 		/*static constexpr const char debugMessage[] = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
 		strncpy_s(DebugTextBuffer, 2048, debugMessage, sizeof(debugMessage));
