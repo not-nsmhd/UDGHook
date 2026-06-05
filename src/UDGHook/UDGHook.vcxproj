@@ -63,7 +63,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>$(SolutionDir)lib\detours\include;$(ProjectDir)src\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)lib\detours\include;$(ProjectDir)src;$(ProjectDir)src\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>NotSet</SubSystem>
@@ -86,7 +86,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>$(SolutionDir)lib\detours\include;$(ProjectDir)src\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)lib\detours\include;$(ProjectDir)src;$(ProjectDir)src\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>NotSet</SubSystem>
@@ -99,6 +99,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Common\Logging\Logging.cpp" />
+    <ClCompile Include="src\GFX\GFXHooks.cpp" />
     <ClCompile Include="src\ImGui\Backends\imgui_impl_dx11.cpp" />
     <ClCompile Include="src\ImGui\Backends\imgui_impl_win32.cpp" />
     <ClCompile Include="src\ImGui\imgui.cpp" />
@@ -107,6 +108,7 @@
     <ClCompile Include="src\ImGui\imgui_tables.cpp" />
     <ClCompile Include="src\ImGui\imgui_widgets.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Main\MainHooks.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\.editorconfig" />
@@ -116,6 +118,8 @@
     <ClInclude Include="src\Common\Logging\Logging.h" />
     <ClInclude Include="src\Common\Rect.h" />
     <ClInclude Include="src\Common\Types.h" />
+    <ClInclude Include="src\GFX\DrawCommands.h" />
+    <ClInclude Include="src\GFX\GFXHooks.h" />
     <ClInclude Include="src\ImGui\Backends\imgui_impl_dx11.h" />
     <ClInclude Include="src\ImGui\Backends\imgui_impl_win32.h" />
     <ClInclude Include="src\ImGui\imconfig.h" />
@@ -124,6 +128,7 @@
     <ClInclude Include="src\ImGui\imstb_rectpack.h" />
     <ClInclude Include="src\ImGui\imstb_textedit.h" />
     <ClInclude Include="src\ImGui\imstb_truetype.h" />
+    <ClInclude Include="src\Main\MainHooks.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

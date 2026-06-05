@@ -25,6 +25,12 @@
     <Filter Include="Source Files\ImGui\Backends">
       <UniqueIdentifier>{0e929620-c8bc-4cfa-85d7-0889473f1018}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GFX">
+      <UniqueIdentifier>{326a3168-bbf8-4b76-a142-44a7cd84d1d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Main">
+      <UniqueIdentifier>{1bd04171-1129-49b0-9f8a-416f159fe372}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -53,6 +59,12 @@
     </ClCompile>
     <ClCompile Include="src\ImGui\Backends\imgui_impl_dx11.cpp">
       <Filter>Source Files\ImGui\Backends</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GFX\GFXHooks.cpp">
+      <Filter>Source Files\GFX</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Main\MainHooks.cpp">
+      <Filter>Source Files\Main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -96,6 +108,15 @@
     </ClInclude>
     <ClInclude Include="src\ImGui\Backends\imgui_impl_dx11.h">
       <Filter>Source Files\ImGui\Backends</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GFX\GFXHooks.h">
+      <Filter>Source Files\GFX</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GFX\DrawCommands.h">
+      <Filter>Source Files\GFX</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Main\MainHooks.h">
+      <Filter>Source Files\Main</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
