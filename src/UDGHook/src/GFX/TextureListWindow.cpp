@@ -41,23 +41,14 @@ namespace UDGHook::GFX
 						texName = fallbackTexNameBuffer;
 					}
 
-					/*if (ImGui::CollapsingHeader(texName))
-					{
-						ImTextureID texPtr = reinterpret_cast<ImTextureID>(tex->D3DShaderResourceView);
-						ImGui::Image(texPtr, ImVec2(128, 128));
-
-						ImGui::Text("Dimensions: %dx%d", tex->Width, tex->Height);
-						ImGui::Text("Bits per pixel: %d", tex->BitsPerPixel);
-						ImGui::Text("Mipmaps: %d", tex->MipCount);
-						ImGui::Text("Size: %u KiB", tex->TotalSize / 1024);
-					}*/
-
+					ImGui::PushID(i);
 					if (ImGui::Selectable(texName))
 					{
 						texViewer->SetTextureToDisplay(tex, texName, &textureExistence[i]);
 						texViewer->TexPageIndex = i;
 						texViewer->IsVisible = true;
 					}
+					ImGui::PopID();
 				}
 				ImGui::EndListBox();
 			}
