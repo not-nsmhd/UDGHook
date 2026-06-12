@@ -19,6 +19,8 @@ using f64 = double;
 
 using offset_t = i64;
 
+using bool_t = i8;
+
 struct NonCopyable
 {
 	NonCopyable() = default;

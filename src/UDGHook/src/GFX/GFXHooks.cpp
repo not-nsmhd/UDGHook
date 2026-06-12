@@ -60,6 +60,10 @@ namespace UDGHook::GFX
 		ogData.FirstDrawCommand = reinterpret_cast<DrawCommand*>(BaseAddress + 0x826490);
 		ogData.MaxDrawCommands = reinterpret_cast<i16*>(BaseAddress + 0x802B72);
 
+		ogData.LoadedTextures = reinterpret_cast<Texture*>(BaseAddress + 0x834E40);
+		ogData.TextureExistence = reinterpret_cast<bool_t*>(BaseAddress + 0x8349F0);
+		ogData.TextureNames = reinterpret_cast<char**>(BaseAddress + 0x076B750);
+
 		LogInfo(LogName, "Max draw commands: %d", *ogData.MaxDrawCommands);
 		LogInfo(LogName, "Initialized GFX");
 		return true;
@@ -74,76 +78,13 @@ namespace UDGHook::GFX
 		return &d3d;
 	}
 
+	OGData* GetOGData()
+	{
+		return &ogData;
+	}
+
 	void HookedFuncs::RenderFrame()
 	{
 		ogFuncs.RenderFrame();
-
-		/*static constexpr const char debugMessage[] = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
-		strncpy_s(DebugTextBuffer, 2048, debugMessage, sizeof(debugMessage));
-		*DebugTextLength = sizeof(debugMessage);*/
-
-		/*ImGui_ImplWin32_NewFrame();
-		ImGui_ImplDX11_NewFrame();
-		ImGui::NewFrame();
-
-		ImGuiIO& io = ImGui::GetIO();
-		TotalElapsedTime += io.DeltaTime;
-
-		if (TotalElapsedTime < 5.0f)
-		{
-			ImGuiWindowFlags flags = 0;
-			flags |= ImGuiWindowFlags_NoMove;
-			flags |= ImGuiWindowFlags_NoResize;
-			flags |= ImGuiWindowFlags_NoTitleBar;
-			flags |= ImGuiWindowFlags_NoCollapse;
-			flags |= ImGuiWindowFlags_NoInputs;
-			flags |= ImGuiWindowFlags_AlwaysAutoResize;
-			ImGui::SetNextWindowPos(ImVec2(0.0f, 0.0f));
-			if (ImGui::Begin("##udghook-dispnotice", nullptr, flags))
-			{
-				ImGui::Text("Press the Insert key to display UDGHook's test window.");
-				ImGui::End();
-			}
-		}
-
-		if (ImGuiActive)
-		{
-			DrawCommand_Base* cmd = FirstDrawCommand;
-			int commands = 0;
-
-			ImGui::Begin("UDGHook - Testing");
-			{
-				ImGui::Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
-				if (ImGui::TreeNode("Draw Command Buffer"))
-				{
-					if (FirstDrawCommand != nullptr)
-					{
-						do
-						{
-							if (cmd->Type < DrawCommandType::Count && cmd->Type > DrawCommandType::None)
-							{
-								ImGui::PushID(commands);
-
-								const std::string_view& typeName = DrawCommandTypeNames[static_cast<size_t>(cmd->Type)];
-								if (ImGui::TreeNode("", "Command %02d (%s)", commands, typeName.data()))
-								{
-									Gfx::ConstructDrawCommandInfo_ImGui(cmd);
-									ImGui::TreePop();
-								}
-
-								commands++;
-								ImGui::PopID();
-							}
-							cmd = cmd->Next;
-						} while (cmd != (FirstDrawCommand + 16 * static_cast<size_t>(*MaxDrawCommands)) && (cmd != nullptr));
-					}
-					ImGui::TreePop();
-				}
-			}
-			ImGui::End();
-		}
-
-		ImGui::Render();
-		ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());*/
 	}
 }

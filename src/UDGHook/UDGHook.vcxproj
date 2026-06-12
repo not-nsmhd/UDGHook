@@ -100,7 +100,9 @@
   <ItemGroup>
     <ClCompile Include="src\Common\Common.cpp" />
     <ClCompile Include="src\Common\Logging\Logging.cpp" />
+    <ClCompile Include="src\GFX\DrawCmdListWindow.cpp" />
     <ClCompile Include="src\GFX\GFXHooks.cpp" />
+    <ClCompile Include="src\GFX\TextureListWindow.cpp" />
     <ClCompile Include="src\ImGui\Backends\imgui_impl_dx11.cpp" />
     <ClCompile Include="src\ImGui\Backends\imgui_impl_win32.cpp" />
     <ClCompile Include="src\ImGui\imgui.cpp" />
@@ -110,6 +112,7 @@
     <ClCompile Include="src\ImGui\imgui_widgets.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Main\MainHooks.cpp" />
+    <ClCompile Include="src\Main\MainMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\.editorconfig" />
@@ -120,8 +123,11 @@
     <ClInclude Include="src\Common\Logging\Logging.h" />
     <ClInclude Include="src\Common\Rect.h" />
     <ClInclude Include="src\Common\Types.h" />
+    <ClInclude Include="src\GFX\DrawCmdListWindow.h" />
     <ClInclude Include="src\GFX\DrawCommands.h" />
     <ClInclude Include="src\GFX\GFXHooks.h" />
+    <ClInclude Include="src\GFX\Texture.h" />
+    <ClInclude Include="src\GFX\TextureListWindow.h" />
     <ClInclude Include="src\ImGui\Backends\imgui_impl_dx11.h" />
     <ClInclude Include="src\ImGui\Backends\imgui_impl_win32.h" />
     <ClInclude Include="src\ImGui\imconfig.h" />
@@ -130,7 +136,9 @@
     <ClInclude Include="src\ImGui\imstb_rectpack.h" />
     <ClInclude Include="src\ImGui\imstb_textedit.h" />
     <ClInclude Include="src\ImGui\imstb_truetype.h" />
+    <ClInclude Include="src\Main\HookWindow.h" />
     <ClInclude Include="src\Main\MainHooks.h" />
+    <ClInclude Include="src\Main\MainMenu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

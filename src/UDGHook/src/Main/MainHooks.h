@@ -8,6 +8,7 @@ namespace UDGHook::Main
 	struct
 	{
 		HWND Handle{};
+		bool* IsFocused{};
 	} WindowData;
 
 	namespace FuncDefs
@@ -17,7 +18,12 @@ namespace UDGHook::Main
 		typedef int (*GameInit)();
 		typedef void (*TryGameInit)();
 
+		typedef void (*GameQuit)();
+
+		typedef void (*UpdatePlayerInputs)(int unknown);
 		typedef void (*RenderFrame)();
+
+		typedef bool (*IsFocused)();
 	}
 
 	struct
@@ -27,7 +33,12 @@ namespace UDGHook::Main
 		FuncDefs::GameInit GameInit{};
 		FuncDefs::TryGameInit TryGameInit{};
 
+		FuncDefs::GameQuit GameQuit{};
+
+		FuncDefs::UpdatePlayerInputs UpdatePlayerInputs{};
 		FuncDefs::RenderFrame RenderFrame{};
+
+		FuncDefs::IsFocused IsFocused{};
 	} OGFuncs;
 
 	namespace HookedFuncs
@@ -35,9 +46,16 @@ namespace UDGHook::Main
 		LRESULT WINAPI WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 		void TryGameInit();
 
+		void GameQuit();
+
+		void UpdatePlayerInputs(int unknown);
 		void RenderFrame();
+
+		bool IsFocused();
 	}
 
 	bool InitHooks(offset_t baseAddress);
 	void DestroyHooks();
+
+	bool IsImGuiActive();
 }

@@ -69,6 +69,15 @@
     <ClCompile Include="src\Common\Common.cpp">
       <Filter>Source Files\Common</Filter>
     </ClCompile>
+    <ClCompile Include="src\Main\MainMenu.cpp">
+      <Filter>Source Files\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GFX\DrawCmdListWindow.cpp">
+      <Filter>Source Files\GFX</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GFX\TextureListWindow.cpp">
+      <Filter>Source Files\GFX</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\.editorconfig">
@@ -123,6 +132,21 @@
     </ClInclude>
     <ClInclude Include="src\Common\Common.h">
       <Filter>Source Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Main\MainMenu.h">
+      <Filter>Source Files\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Main\HookWindow.h">
+      <Filter>Source Files\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GFX\DrawCmdListWindow.h">
+      <Filter>Source Files\GFX</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GFX\TextureListWindow.h">
+      <Filter>Source Files\GFX</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GFX\Texture.h">
+      <Filter>Source Files\GFX</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -4,6 +4,7 @@
 #include "Common/Types.h"
 #include "Common/Logging/Logging.h"
 #include "DrawCommands.h"
+#include "Texture.h"
 
 namespace UDGHook::GFX
 {
@@ -35,6 +36,10 @@ namespace UDGHook::GFX
 	{
 		DrawCommand* FirstDrawCommand{};
 		i16* MaxDrawCommands{};
+
+		Texture* LoadedTextures{};
+		bool_t* TextureExistence{};
+		char** TextureNames{};
 	};
 
 	namespace HookedFuncs
@@ -49,4 +54,5 @@ namespace UDGHook::GFX
 	void Destroy();
 
 	D3DData* GetD3DData();
+	OGData* GetOGData();
 }
